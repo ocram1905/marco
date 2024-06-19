@@ -4,25 +4,42 @@ body {
     align-items: center;
     height: 100vh;
     flex-direction: column;
-    background-color: #f5f5f5;
-    font-family: Arial, sans-serif;
+    background-color: #f2c6d0;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 0;
 }
 
 .slot-machine {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    grid-gap: 10px;
     margin-bottom: 20px;
+    background-color: #ffebee;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.reel-container {
+    display: flex;
 }
 
 .reel {
     width: 100px;
     height: 100px;
-    border: 2px solid #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
-    margin: 0 5px;
-    background-color: white;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    animation: spin 1s ease-out;
+}
+
+.reel img {
+    width: 80px;
+    height: 80px;
 }
 
 button {
@@ -30,6 +47,17 @@ button {
     font-size: 1.2rem;
     cursor: pointer;
     border: none;
-    background-color: #333;
+    background-color: #ff4081;
     color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #e91e63;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-200%); }
+    100% { transform: translateY(0); }
 }
