@@ -1,26 +1,43 @@
 document.getElementById('spinButton').addEventListener('click', spin);
 
 function spin() {
-    const symbols = ['candy1.png', 'candy2.png', 'candy3.png', 'candy4.png', 'candy5.png', 'candy6.png'];
-    const reel1 = document.getElementById('reel1').querySelector('img');
-    const reel2 = document.getElementById('reel2').querySelector('img');
-    const reel3 = document.getElementById('reel3').querySelector('img');
+    const symbols = [
+        'symbols/foto1.png',
+        'symbols/foto2.png',
+        'symbols/foto3.png',
+        'symbols/foto4.png',
+        'symbols/foto5.png',
+        'symbols/foto6.png'
+    ];
 
-    const getRandomSymbol = () => symbols[Math.floor(Math.random() * symbols.length)];
+    const reels = document.querySelectorAll('.reel');
+    
+    reels.forEach(reel => {
+        const symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        reel.innerHTML = `<img src="${symbol}" alt="Candy">`;
+        reel.style.animation = 'none';
+        reel.offsetHeight; /* trigger reflow */
+        reel.style.animation = null;
+    });
 
-    const symbol1 = getRandomSymbol();
-    const symbol2 = getRandomSymbol();
-    const symbol3 = getRandomSymbol();
-
-    reel1.src = `symbols/${symbol1}`;
-    reel2.src = `symbols/${symbol2}`;
-    reel3.src = `symbols/${symbol3}`;
-
-    checkResult(symbol1, symbol2, symbol3);
+    // Optional: add a delay before checking the result
+    setTimeout(() => {
+        checkResult();
+    }, 1000);
 }
 
-function checkResult(symbol1, symbol2, symbol3) {
-    if (symbol1 === symbol2 && symbol2 === symbol3) {
+function checkResult() {
+    const symbols = [];
+    const reels = document.querySelectorAll('.reel img');
+    reels.forEach(reel => {
+        symbols.push(reel.src);
+    });
+
+    // Check if all symbols are the same
+    const firstSymbol = symbols[0];
+    const isWin = symbols.every(symbol => symbol === firstSymbol);
+
+    if (isWin) {
         alert('Hai vinto!');
     } else {
         alert('Riprova!');
